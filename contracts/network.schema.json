@@ -1,0 +1,493 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "维修能力网络快照",
+  "type": "object",
+  "required": [
+    "as_of",
+    "baseline",
+    "sites",
+    "aircraft",
+    "configurations",
+    "programs",
+    "workcards",
+    "directives",
+    "personnel",
+    "tools",
+    "parts",
+    "flights",
+    "checks"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "type": "string",
+      "description": "快照时刻"
+    },
+    "baseline": {
+      "type": "object",
+      "description": "数量守恒校验基线：基线时刻各部件位置与工具保管权",
+      "required": ["as_of", "parts", "tools"],
+      "additionalProperties": false,
+      "properties": {
+        "as_of": {
+          "type": "string"
+        },
+        "parts": {
+          "type": "object",
+          "description": "部件序号 → 位置（飞机编号或 STORE-/QUARANTINE-/SHOP-站点）",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tools": {
+          "type": "object",
+          "description": "工具编号 → 保管站点",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "kind", "capabilities", "local_policy"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": ["base", "ga_airport"]
+          },
+          "capabilities": {
+            "type": "array",
+            "description": "声明的维修能力矩阵",
+            "items": {
+              "type": "object",
+              "required": ["code", "status"],
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "enum": ["LINE", "A_CHECK", "C_CHECK", "DEEP_CHECK"]
+                },
+                "status": {
+                  "enum": ["active", "suspended"]
+                }
+              }
+            }
+          },
+          "local_policy": {
+            "type": "object",
+            "description": "一地一策：站点本地化工卡与备件清单",
+            "required": ["workcard_variants", "spares_pool"],
+            "additionalProperties": false,
+            "properties": {
+              "workcard_variants": {
+                "type": "object",
+                "description": "工卡@修订 → 站点适配版编号",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "spares_pool": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "aircraft": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "config", "home", "at", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "config": {
+            "type": "string"
+          },
+          "home": {
+            "type": "string",
+            "description": "归属基地"
+          },
+          "at": {
+            "type": "string",
+            "description": "当前所在站点"
+          },
+          "status": {
+            "enum": ["in_service", "in_check", "grounded"]
+          }
+        }
+      }
+    },
+    "configurations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "valid_from", "valid_to", "items"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "valid_from": {
+            "type": "string"
+          },
+          "valid_to": {
+            "type": ["string", "null"]
+          },
+          "items": {
+            "type": "object",
+            "description": "构型项（选型设备、软件版本等）",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "programs": {
+      "type": "array",
+      "description": "维修方案版本，定义对构型有效的工卡组合",
+      "items": {
+        "type": "object",
+        "required": ["id", "revision", "applicable_configs", "valid_from", "valid_to", "workcards"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "string"
+          },
+          "applicable_configs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "valid_from": {
+            "type": "string"
+          },
+          "valid_to": {
+            "type": ["string", "null"]
+          },
+          "workcards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["card", "revision"],
+              "additionalProperties": false,
+              "properties": {
+                "card": {
+                  "type": "string"
+                },
+                "revision": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "workcards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "dual_sign", "applicable_configs", "revisions"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "dual_sign": {
+            "type": "boolean",
+            "description": "是否要求执行与检验双签"
+          },
+          "applicable_configs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "revisions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["rev", "status", "effective_from", "effective_to"],
+              "additionalProperties": false,
+              "properties": {
+                "rev": {
+                  "type": "string"
+                },
+                "status": {
+                  "enum": ["effective", "superseded", "void"]
+                },
+                "effective_from": {
+                  "type": "string"
+                },
+                "effective_to": {
+                  "type": ["string", "null"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "directives": {
+      "type": "array",
+      "description": "适航指令及其修订",
+      "items": {
+        "type": "object",
+        "required": ["id", "revision", "status", "effective_from", "compliance", "applicable_configs"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "string"
+          },
+          "status": {
+            "enum": ["effective", "superseded"]
+          },
+          "effective_from": {
+            "type": "string"
+          },
+          "compliance": {
+            "type": "string",
+            "description": "符合性期限"
+          },
+          "applicable_configs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "personnel": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "qualifications"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "qualifications": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["aircraft", "levels", "roles", "sites", "valid_from", "valid_to"],
+              "additionalProperties": false,
+              "properties": {
+                "aircraft": {
+                  "type": "string"
+                },
+                "levels": {
+                  "type": "array",
+                  "items": {
+                    "enum": ["LINE", "A_CHECK", "C_CHECK", "DEEP_CHECK"]
+                  }
+                },
+                "roles": {
+                  "type": "array",
+                  "items": {
+                    "enum": ["perform", "inspect", "release"]
+                  }
+                },
+                "sites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "valid_from": {
+                  "type": "string"
+                },
+                "valid_to": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "home_site", "custody", "calibration"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "home_site": {
+            "type": "string"
+          },
+          "custody": {
+            "type": "string",
+            "description": "当前保管站点（外借期间为借入方）"
+          },
+          "calibration": {
+            "type": "object",
+            "required": ["cert", "valid_until"],
+            "additionalProperties": false,
+            "properties": {
+              "cert": {
+                "type": "string"
+              },
+              "valid_until": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sn", "pn", "location", "life_limit", "used"],
+        "additionalProperties": false,
+        "properties": {
+          "sn": {
+            "type": "string"
+          },
+          "pn": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string",
+            "description": "飞机编号或 STORE-/QUARANTINE-/SHOP-站点"
+          },
+          "life_limit": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          },
+          "used": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "flights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "aircraft", "from", "to", "dep", "arr"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "aircraft": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "dep": {
+            "type": "string"
+          },
+          "arr": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "description": "定检工单",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "aircraft",
+          "site",
+          "level",
+          "program",
+          "program_revision",
+          "status",
+          "opened",
+          "closed",
+          "planned_for",
+          "release"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "aircraft": {
+            "type": "string"
+          },
+          "site": {
+            "type": "string"
+          },
+          "level": {
+            "enum": ["LINE", "A_CHECK", "C_CHECK", "DEEP_CHECK"]
+          },
+          "program": {
+            "type": "string"
+          },
+          "program_revision": {
+            "type": "string"
+          },
+          "status": {
+            "enum": ["planned", "in_progress", "released", "returned"]
+          },
+          "opened": {
+            "type": ["string", "null"]
+          },
+          "closed": {
+            "type": ["string", "null"]
+          },
+          "planned_for": {
+            "type": ["string", "null"]
+          },
+          "release": {
+            "type": ["string", "null"]
+          }
+        }
+      }
+    }
+  }
+}

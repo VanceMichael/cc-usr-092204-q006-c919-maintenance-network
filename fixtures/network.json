@@ -1,0 +1,270 @@
+{
+  "as_of": "2026-09-26T12:00:00+08:00",
+  "baseline": {
+    "as_of": "2026-09-20T00:00:00+08:00",
+    "parts": {
+      "PN-1001-0003": "AC03",
+      "PN-1001-0007": "STORE-CAN",
+      "PN-2002-0009": "AC04",
+      "PN-2002-0011": "STORE-CSX",
+      "PN-3003-0021": "AC09"
+    },
+    "tools": {
+      "TL-5001": "CAN",
+      "TL-5002": "CSX",
+      "TL-5003": "CAN",
+      "TL-5004": "GA2",
+      "TL-5005": "CAN"
+    }
+  },
+  "sites": [
+    {
+      "id": "CAN",
+      "name": "广州基地",
+      "kind": "base",
+      "capabilities": [
+        { "code": "LINE", "status": "active" },
+        { "code": "A_CHECK", "status": "active" },
+        { "code": "C_CHECK", "status": "active" },
+        { "code": "DEEP_CHECK", "status": "active" }
+      ],
+      "local_policy": {
+        "workcard_variants": {
+          "WC-ENG-001@R2": "WC-ENG-001-CAN-R2"
+        },
+        "spares_pool": ["PN-1001", "PN-2002"],
+        "notes": "深度定检基地，结构与航电全工卡；发动机孔探工卡使用本地适配版"
+      }
+    },
+    {
+      "id": "CSX",
+      "name": "湖南基地",
+      "kind": "base",
+      "capabilities": [
+        { "code": "LINE", "status": "active" },
+        { "code": "A_CHECK", "status": "active" },
+        { "code": "C_CHECK", "status": "active" }
+      ],
+      "local_policy": {
+        "workcard_variants": {},
+        "spares_pool": ["PN-2002"],
+        "notes": "承接航线维护、A检与C检；C检放行授权尚待补充"
+      }
+    },
+    {
+      "id": "GA1",
+      "name": "通航机场一",
+      "kind": "ga_airport",
+      "capabilities": [
+        { "code": "LINE", "status": "active" }
+      ],
+      "local_policy": {
+        "workcard_variants": {},
+        "spares_pool": ["PN-2002"],
+        "notes": "航线维护；航电装载车自广州基地借用保障"
+      }
+    },
+    {
+      "id": "GA2",
+      "name": "通航机场二",
+      "kind": "ga_airport",
+      "capabilities": [
+        { "code": "LINE", "status": "active" }
+      ],
+      "local_policy": {
+        "workcard_variants": {},
+        "spares_pool": [],
+        "notes": "航线维护；轮胎更换设备校准超期且唯一放行授权到期，航线能力暂停中"
+      }
+    }
+  ],
+  "aircraft": [
+    { "id": "AC01", "config": "CFG-A", "home": "CAN", "at": "CAN", "status": "in_service" },
+    { "id": "AC02", "config": "CFG-A", "home": "CAN", "at": "CAN", "status": "in_service" },
+    { "id": "AC03", "config": "CFG-A", "home": "CAN", "at": "CAN", "status": "in_check" },
+    { "id": "AC04", "config": "CFG-A", "home": "CSX", "at": "CSX", "status": "in_service" },
+    { "id": "AC05", "config": "CFG-A", "home": "CSX", "at": "CAN", "status": "in_service" },
+    { "id": "AC06", "config": "CFG-A", "home": "CSX", "at": "CAN", "status": "in_service" },
+    { "id": "AC07", "config": "CFG-A", "home": "CSX", "at": "CSX", "status": "in_service" },
+    { "id": "AC08", "config": "CFG-A", "home": "CAN", "at": "GA2", "status": "in_service" },
+    { "id": "AC09", "config": "CFG-B", "home": "CSX", "at": "CSX", "status": "in_service" },
+    { "id": "AC10", "config": "CFG-B", "home": "CSX", "at": "CSX", "status": "in_service" },
+    { "id": "AC11", "config": "CFG-B", "home": "CAN", "at": "CAN", "status": "in_service" },
+    { "id": "AC12", "config": "CFG-B", "home": "CSX", "at": "GA1", "status": "in_service" }
+  ],
+  "configurations": [
+    {
+      "id": "CFG-A",
+      "valid_from": "2025-01-01",
+      "valid_to": null,
+      "items": { "engine": "STD", "wx_radar": "BASE", "atsu": "V1" }
+    },
+    {
+      "id": "CFG-B",
+      "valid_from": "2026-03-01",
+      "valid_to": null,
+      "items": { "engine": "STD", "wx_radar": "ENH", "atsu": "V2" }
+    }
+  ],
+  "programs": [
+    {
+      "id": "MP-C919",
+      "revision": "R2",
+      "applicable_configs": ["CFG-A"],
+      "valid_from": "2026-01-01",
+      "valid_to": "2026-08-31",
+      "workcards": [
+        { "card": "WC-ENG-001", "revision": "R1" },
+        { "card": "WC-LDG-014", "revision": "R3" }
+      ]
+    },
+    {
+      "id": "MP-C919",
+      "revision": "R3",
+      "applicable_configs": ["CFG-A", "CFG-B"],
+      "valid_from": "2026-09-01",
+      "valid_to": null,
+      "workcards": [
+        { "card": "WC-ENG-001", "revision": "R2" },
+        { "card": "WC-LDG-014", "revision": "R3" },
+        { "card": "WC-STR-220", "revision": "R1" },
+        { "card": "WC-AVN-007", "revision": "R1" }
+      ]
+    }
+  ],
+  "workcards": [
+    {
+      "id": "WC-ENG-001",
+      "title": "发动机孔探检查",
+      "dual_sign": true,
+      "applicable_configs": ["CFG-A", "CFG-B"],
+      "revisions": [
+        { "rev": "R1", "status": "superseded", "effective_from": "2026-01-01", "effective_to": "2026-07-31" },
+        { "rev": "R2", "status": "effective", "effective_from": "2026-08-01", "effective_to": null }
+      ]
+    },
+    {
+      "id": "WC-LDG-014",
+      "title": "起落架勤务与检查",
+      "dual_sign": true,
+      "applicable_configs": ["CFG-A", "CFG-B"],
+      "revisions": [
+        { "rev": "R3", "status": "effective", "effective_from": "2026-05-01", "effective_to": null }
+      ]
+    },
+    {
+      "id": "WC-STR-220",
+      "title": "机身结构详细检查",
+      "dual_sign": true,
+      "applicable_configs": ["CFG-A", "CFG-B"],
+      "revisions": [
+        { "rev": "R1", "status": "effective", "effective_from": "2026-09-01", "effective_to": null }
+      ]
+    },
+    {
+      "id": "WC-AVN-007",
+      "title": "航电软件装载",
+      "dual_sign": false,
+      "applicable_configs": ["CFG-B"],
+      "revisions": [
+        { "rev": "R1", "status": "effective", "effective_from": "2026-09-01", "effective_to": null }
+      ]
+    }
+  ],
+  "directives": [
+    {
+      "id": "AD-2026-018",
+      "revision": "R0",
+      "status": "superseded",
+      "effective_from": "2026-06-01",
+      "compliance": "2026-12-31前",
+      "applicable_configs": ["CFG-A"]
+    },
+    {
+      "id": "AD-2026-018",
+      "revision": "R1",
+      "status": "effective",
+      "effective_from": "2026-09-28",
+      "compliance": "2026-10-15前",
+      "applicable_configs": ["CFG-A", "CFG-B"]
+    }
+  ],
+  "personnel": [
+    {
+      "id": "P-1001",
+      "qualifications": [
+        { "aircraft": "C919", "levels": ["LINE", "A_CHECK", "C_CHECK", "DEEP_CHECK"], "roles": ["perform", "inspect"], "sites": ["CAN"], "valid_from": "2026-01-01", "valid_to": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-1002",
+      "qualifications": [
+        { "aircraft": "C919", "levels": ["A_CHECK", "C_CHECK", "DEEP_CHECK"], "roles": ["perform", "inspect", "release"], "sites": ["CAN"], "valid_from": "2026-01-01", "valid_to": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-1003",
+      "qualifications": [
+        { "aircraft": "C919", "levels": ["LINE", "A_CHECK"], "roles": ["perform", "release"], "sites": ["CAN"], "valid_from": "2026-01-01", "valid_to": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-1004",
+      "qualifications": [
+        { "aircraft": "C919", "levels": ["C_CHECK", "DEEP_CHECK"], "roles": ["inspect"], "sites": ["CAN"], "valid_from": "2026-01-01", "valid_to": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-1005",
+      "qualifications": [
+        { "aircraft": "C919", "levels": ["LINE", "A_CHECK"], "roles": ["perform", "release"], "sites": ["CSX"], "valid_from": "2026-01-01", "valid_to": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-1006",
+      "qualifications": [
+        { "aircraft": "C919", "levels": ["LINE", "A_CHECK"], "roles": ["inspect"], "sites": ["CSX"], "valid_from": "2026-01-01", "valid_to": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-1007",
+      "qualifications": [
+        { "aircraft": "C919", "levels": ["LINE"], "roles": ["perform", "release"], "sites": ["GA1"], "valid_from": "2026-01-01", "valid_to": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-1009",
+      "qualifications": [
+        { "aircraft": "C919", "levels": ["LINE"], "roles": ["perform", "release"], "sites": ["GA2"], "valid_from": "2026-01-01", "valid_to": "2026-09-25" }
+      ]
+    }
+  ],
+  "tools": [
+    { "id": "TL-5001", "name": "发动机吊装架", "home_site": "CAN", "custody": "CAN", "calibration": { "cert": "CAL-2601", "valid_until": "2026-12-01" } },
+    { "id": "TL-5002", "name": "液压测试台", "home_site": "CSX", "custody": "CSX", "calibration": { "cert": "CAL-2602", "valid_until": "2026-11-15" } },
+    { "id": "TL-5003", "name": "航电装载车", "home_site": "CAN", "custody": "GA1", "calibration": { "cert": "CAL-2603", "valid_until": "2026-10-30" } },
+    { "id": "TL-5004", "name": "轮胎更换设备", "home_site": "GA2", "custody": "GA2", "calibration": { "cert": "CAL-2604", "valid_until": "2026-09-25" } },
+    { "id": "TL-5005", "name": "超声探伤仪", "home_site": "CAN", "custody": "CAN", "calibration": { "cert": "CAL-2605", "valid_until": "2027-03-01" } }
+  ],
+  "parts": [
+    { "sn": "PN-1001-0003", "pn": "PN-1001", "location": "QUARANTINE-CAN", "life_limit": { "cycles": 5000 }, "used": { "cycles": 3100 } },
+    { "sn": "PN-1001-0007", "pn": "PN-1001", "location": "AC03", "life_limit": { "cycles": 5000 }, "used": { "cycles": 1200 } },
+    { "sn": "PN-2002-0009", "pn": "PN-2002", "location": "STORE-CSX", "life_limit": { "cycles": 2000 }, "used": { "cycles": 1800 } },
+    { "sn": "PN-2002-0011", "pn": "PN-2002", "location": "AC04", "life_limit": { "cycles": 2000 }, "used": { "cycles": 300 } },
+    { "sn": "PN-3003-0021", "pn": "PN-3003", "location": "AC09", "life_limit": { "cycles": 5000 }, "used": { "cycles": 4600 } }
+  ],
+  "flights": [
+    { "id": "FLT-9200", "aircraft": "AC05", "from": "GA1", "to": "CAN", "dep": "2026-09-25T23:30:00+08:00", "arr": "2026-09-26T01:20:00+08:00" },
+    { "id": "FLT-9101", "aircraft": "AC06", "from": "CAN", "to": "GA2", "dep": "2026-09-26T14:00:00+08:00", "arr": "2026-09-26T15:20:00+08:00" },
+    { "id": "FLT-9102", "aircraft": "AC06", "from": "GA2", "to": "CSX", "dep": "2026-09-26T18:30:00+08:00", "arr": "2026-09-26T19:40:00+08:00" },
+    { "id": "FLT-9103", "aircraft": "AC08", "from": "GA2", "to": "CAN", "dep": "2026-09-27T09:00:00+08:00", "arr": "2026-09-27T10:10:00+08:00" },
+    { "id": "FLT-9201", "aircraft": "AC11", "from": "CAN", "to": "CSX", "dep": "2026-09-26T20:00:00+08:00", "arr": "2026-09-26T21:15:00+08:00" },
+    { "id": "FLT-9202", "aircraft": "AC09", "from": "CSX", "to": "CAN", "dep": "2026-09-27T08:00:00+08:00", "arr": "2026-09-27T09:10:00+08:00" }
+  ],
+  "checks": [
+    { "id": "CHK-288", "aircraft": "AC04", "site": "CSX", "level": "A_CHECK", "program": "MP-C919", "program_revision": "R3", "status": "released", "opened": "2026-09-20T08:00:00+08:00", "closed": "2026-09-20T17:30:00+08:00", "planned_for": null, "release": "REL-7001" },
+    { "id": "CHK-301", "aircraft": "AC03", "site": "CAN", "level": "DEEP_CHECK", "program": "MP-C919", "program_revision": "R3", "status": "in_progress", "opened": "2026-09-24T09:00:00+08:00", "closed": null, "planned_for": null, "release": null },
+    { "id": "CHK-305", "aircraft": "AC10", "site": "CSX", "level": "A_CHECK", "program": "MP-C919", "program_revision": "R3", "status": "planned", "opened": null, "closed": null, "planned_for": "2026-09-28T09:00:00+08:00", "release": null },
+    { "id": "CHK-306", "aircraft": "AC08", "site": "GA2", "level": "LINE", "program": "MP-C919", "program_revision": "R3", "status": "planned", "opened": null, "closed": null, "planned_for": "2026-09-26T21:00:00+08:00", "release": null }
+  ]
+}

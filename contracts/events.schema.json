@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "审计事件流",
+  "description": "维修能力网络的审计事件序列。事件按 seq 全序排列，recorded_at 单调不减；发生时间乱序的补传事件必须标记 channel=offline_backfill。",
+  "type": "object",
+  "required": ["stream", "events"],
+  "additionalProperties": false,
+  "properties": {
+    "stream": {
+      "type": "string",
+      "description": "事件流标识"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "check", "card", "revision", "signers", "tools_used"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "workcard_signoff" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "check": { "type": "string" },
+              "card": { "type": "string" },
+              "revision": { "type": "string" },
+              "variant": { "type": "string", "description": "站点适配工卡编号（一地一策）" },
+              "signers": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "role"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": { "type": "string" },
+                    "role": { "enum": ["perform", "inspect"] }
+                  }
+                }
+              },
+              "tools_used": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "actor", "check", "aircraft", "removed", "installed"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "part_swap" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "actor": { "type": "string" },
+              "check": { "type": "string" },
+              "aircraft": { "type": "string" },
+              "removed": {
+                "type": "object",
+                "required": ["sn", "destination"],
+                "additionalProperties": false,
+                "properties": {
+                  "sn": { "type": "string" },
+                  "destination": { "type": "string", "description": "拆下件去向" }
+                }
+              },
+              "installed": {
+                "type": "object",
+                "required": ["sn", "source"],
+                "additionalProperties": false,
+                "properties": {
+                  "sn": { "type": "string" },
+                  "source": { "type": "string", "description": "装上件来源" }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "actor", "release", "check", "aircraft"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "release" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "actor": { "type": "string" },
+              "release": { "type": "string" },
+              "check": { "type": "string" },
+              "aircraft": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "actor", "tool", "qty", "from_site", "to_site"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "tool_loan" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "actor": { "type": "string" },
+              "tool": { "type": "string" },
+              "qty": { "type": "integer", "minimum": 1 },
+              "from_site": { "type": "string" },
+              "to_site": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "actor", "tool", "qty", "from_site", "to_site"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "tool_return" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "actor": { "type": "string" },
+              "tool": { "type": "string" },
+              "qty": { "type": "integer", "minimum": 1 },
+              "from_site": { "type": "string" },
+              "to_site": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "check", "aircraft", "level", "program", "program_revision"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "check_opened" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "check": { "type": "string" },
+              "aircraft": { "type": "string" },
+              "level": { "enum": ["LINE", "A_CHECK", "C_CHECK", "DEEP_CHECK"] },
+              "program": { "type": "string" },
+              "program_revision": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "check", "from_shift", "to_shift", "outgoing", "incoming"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "shift_handover" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "check": { "type": "string" },
+              "from_shift": { "type": "string" },
+              "to_shift": { "type": "string" },
+              "outgoing": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+              "incoming": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "directive", "revision", "effective_from"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "ad_revision_published" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "directive": { "type": "string" },
+              "revision": { "type": "string" },
+              "effective_from": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "actor", "directive", "revision", "check", "decision", "rationale"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "ad_disposition" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "actor": { "type": "string" },
+              "directive": { "type": "string" },
+              "revision": { "type": "string" },
+              "check": { "type": "string" },
+              "decision": { "enum": ["continue", "append", "return"], "description": "继续 / 追加 / 退回" },
+              "rationale": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "actor", "fault", "aircraft", "ata", "summary"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "fault_report" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "actor": { "type": "string" },
+              "fault": { "type": "string" },
+              "aircraft": { "type": "string" },
+              "ata": { "type": "string" },
+              "summary": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "actor", "primary", "merged", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "fault_merge" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "actor": { "type": "string" },
+              "primary": { "type": "string" },
+              "merged": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+              "reason": { "type": "string" }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["seq", "type", "occurred_at", "recorded_at", "site", "capability", "from", "to", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "seq": { "type": "integer", "minimum": 1 },
+              "type": { "const": "capability_suspension" },
+              "occurred_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "recorded_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[+-]\\d{2}:\\d{2}$" },
+              "channel": { "enum": ["online", "offline_backfill"] },
+              "site": { "type": "string" },
+              "capability": { "enum": ["LINE", "A_CHECK", "C_CHECK", "DEEP_CHECK"] },
+              "from": { "type": "string" },
+              "to": { "type": ["string", "null"] },
+              "reason": { "type": "string" }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

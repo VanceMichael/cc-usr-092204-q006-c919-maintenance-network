@@ -1,0 +1,205 @@
+{
+  "stream": "AUDIT-C919-NETWORK",
+  "events": [
+    {
+      "seq": 1,
+      "type": "workcard_signoff",
+      "occurred_at": "2026-09-20T16:55:00+08:00",
+      "recorded_at": "2026-09-20T16:55:00+08:00",
+      "channel": "online",
+      "site": "CSX",
+      "check": "CHK-288",
+      "card": "WC-LDG-014",
+      "revision": "R3",
+      "signers": [
+        { "id": "P-1005", "role": "perform" },
+        { "id": "P-1006", "role": "inspect" }
+      ],
+      "tools_used": ["TL-5002"]
+    },
+    {
+      "seq": 2,
+      "type": "part_swap",
+      "occurred_at": "2026-09-20T17:10:00+08:00",
+      "recorded_at": "2026-09-20T17:10:00+08:00",
+      "channel": "online",
+      "site": "CSX",
+      "actor": "P-1005",
+      "check": "CHK-288",
+      "aircraft": "AC04",
+      "removed": { "sn": "PN-2002-0009", "destination": "STORE-CSX" },
+      "installed": { "sn": "PN-2002-0011", "source": "STORE-CSX" }
+    },
+    {
+      "seq": 3,
+      "type": "release",
+      "occurred_at": "2026-09-20T17:30:00+08:00",
+      "recorded_at": "2026-09-20T17:30:00+08:00",
+      "channel": "online",
+      "site": "CSX",
+      "actor": "P-1005",
+      "release": "REL-7001",
+      "check": "CHK-288",
+      "aircraft": "AC04"
+    },
+    {
+      "seq": 4,
+      "type": "tool_loan",
+      "occurred_at": "2026-09-22T10:00:00+08:00",
+      "recorded_at": "2026-09-22T10:00:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "actor": "P-1003",
+      "tool": "TL-5003",
+      "qty": 1,
+      "from_site": "CAN",
+      "to_site": "GA1"
+    },
+    {
+      "seq": 5,
+      "type": "check_opened",
+      "occurred_at": "2026-09-24T09:00:00+08:00",
+      "recorded_at": "2026-09-24T09:00:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "check": "CHK-301",
+      "aircraft": "AC03",
+      "level": "DEEP_CHECK",
+      "program": "MP-C919",
+      "program_revision": "R3"
+    },
+    {
+      "seq": 6,
+      "type": "workcard_signoff",
+      "occurred_at": "2026-09-25T02:30:00+08:00",
+      "recorded_at": "2026-09-25T02:30:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "check": "CHK-301",
+      "card": "WC-ENG-001",
+      "revision": "R2",
+      "variant": "WC-ENG-001-CAN-R2",
+      "signers": [
+        { "id": "P-1001", "role": "perform" },
+        { "id": "P-1004", "role": "inspect" }
+      ],
+      "tools_used": ["TL-5001"]
+    },
+    {
+      "seq": 7,
+      "type": "part_swap",
+      "occurred_at": "2026-09-25T03:10:00+08:00",
+      "recorded_at": "2026-09-25T03:10:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "actor": "P-1001",
+      "check": "CHK-301",
+      "aircraft": "AC03",
+      "removed": { "sn": "PN-1001-0003", "destination": "QUARANTINE-CAN" },
+      "installed": { "sn": "PN-1001-0007", "source": "STORE-CAN" }
+    },
+    {
+      "seq": 8,
+      "type": "shift_handover",
+      "occurred_at": "2026-09-25T08:00:00+08:00",
+      "recorded_at": "2026-09-25T08:00:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "check": "CHK-301",
+      "from_shift": "夜班",
+      "to_shift": "白班",
+      "outgoing": ["P-1001"],
+      "incoming": ["P-1002", "P-1004"]
+    },
+    {
+      "seq": 9,
+      "type": "workcard_signoff",
+      "occurred_at": "2026-09-25T14:20:00+08:00",
+      "recorded_at": "2026-09-25T14:20:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "check": "CHK-301",
+      "card": "WC-STR-220",
+      "revision": "R1",
+      "signers": [
+        { "id": "P-1002", "role": "perform" },
+        { "id": "P-1004", "role": "inspect" }
+      ],
+      "tools_used": ["TL-5005"]
+    },
+    {
+      "seq": 10,
+      "type": "ad_revision_published",
+      "occurred_at": "2026-09-25T20:40:00+08:00",
+      "recorded_at": "2026-09-25T20:40:00+08:00",
+      "channel": "online",
+      "directive": "AD-2026-018",
+      "revision": "R1",
+      "effective_from": "2026-09-28"
+    },
+    {
+      "seq": 11,
+      "type": "fault_report",
+      "occurred_at": "2026-09-25T19:50:00+08:00",
+      "recorded_at": "2026-09-26T06:30:00+08:00",
+      "channel": "offline_backfill",
+      "site": "GA1",
+      "actor": "P-1007",
+      "fault": "F-101",
+      "aircraft": "AC05",
+      "ata": "32",
+      "summary": "起落架收放警告间歇出现，离线机场网络中断，恢复后补传"
+    },
+    {
+      "seq": 12,
+      "type": "fault_report",
+      "occurred_at": "2026-09-26T07:50:00+08:00",
+      "recorded_at": "2026-09-26T07:55:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "actor": "P-1003",
+      "fault": "F-102",
+      "aircraft": "AC05",
+      "ata": "32",
+      "summary": "调机抵站后同一警告再现"
+    },
+    {
+      "seq": 13,
+      "type": "fault_merge",
+      "occurred_at": "2026-09-26T08:20:00+08:00",
+      "recorded_at": "2026-09-26T08:20:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "actor": "P-1003",
+      "primary": "F-101",
+      "merged": ["F-102"],
+      "reason": "同一ATA章节同一现象重复报告，合并跟踪"
+    },
+    {
+      "seq": 14,
+      "type": "ad_disposition",
+      "occurred_at": "2026-09-26T09:15:00+08:00",
+      "recorded_at": "2026-09-26T09:15:00+08:00",
+      "channel": "online",
+      "site": "CAN",
+      "actor": "P-1002",
+      "directive": "AD-2026-018",
+      "revision": "R1",
+      "check": "CHK-301",
+      "decision": "append",
+      "rationale": "定检未出厂，本次追加R1新增检查工卡，不退回重规划"
+    },
+    {
+      "seq": 15,
+      "type": "capability_suspension",
+      "occurred_at": "2026-09-26T10:00:00+08:00",
+      "recorded_at": "2026-09-26T10:00:00+08:00",
+      "channel": "online",
+      "site": "GA2",
+      "capability": "LINE",
+      "from": "2026-09-26T10:00:00+08:00",
+      "to": null,
+      "reason": "轮胎更换设备校准超期且唯一放行授权到期"
+    }
+  ]
+}
