@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "放行记录",
+  "description": "一次定检或航线维修的放行证据：工卡、工具、部件与签署",
+  "type": "object",
+  "required": ["id", "aircraft", "site", "level", "openedAt", "closedAt", "cards", "toolsUsed", "partsInstalled", "partsRemoved", "signatures", "auditRefs"],
+  "properties": {
+    "id": { "type": "string" },
+    "aircraft": { "type": "string" },
+    "site": { "type": "string" },
+    "level": { "type": "string", "enum": ["航线维修", "A检", "C检", "深度定检"] },
+    "openedAt": { "type": "string" },
+    "closedAt": { "type": ["string", "null"], "description": "未关闭为 null，表示定检进行中" },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["card", "revision", "signedBy", "signedAt"],
+        "properties": {
+          "card": { "type": "string" },
+          "revision": { "type": "string" },
+          "signedBy": { "type": "string" },
+          "signedAt": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "toolsUsed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["tool", "usedAt"],
+        "properties": {
+          "tool": { "type": "string" },
+          "usedAt": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "partsInstalled": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["serial", "at"],
+        "properties": {
+          "serial": { "type": "string" },
+          "at": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "partsRemoved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["serial", "at"],
+        "properties": {
+          "serial": { "type": "string" },
+          "at": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["person", "role", "signedAt", "seq"],
+        "properties": {
+          "person": { "type": "string" },
+          "role": { "type": "string", "enum": ["检验", "放行"] },
+          "signedAt": { "type": "string" },
+          "seq": { "type": "integer", "minimum": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "auditRefs": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "description": "该放行对应的站点审计链事件序号"
+    }
+  },
+  "additionalProperties": false
+}

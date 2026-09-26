@@ -1,0 +1,62 @@
+{
+  "tools": [
+    { "id": "TL-001", "type": "TT-TORQUE", "custodian": "GZ", "status": "在库", "calibrationDue": "2027-03-31" },
+    { "id": "TL-002", "type": "TT-BORE", "custodian": "GZ", "status": "在库", "calibrationDue": "2026-12-31" },
+    { "id": "TL-003", "type": "TT-JACK", "custodian": "GZ", "status": "在库", "calibrationDue": "2027-01-31" },
+    { "id": "TL-004", "type": "TT-SOFT", "custodian": "GZ", "status": "在库", "calibrationDue": "2027-06-30" },
+    { "id": "TL-005", "type": "TT-TORQUE", "custodian": "HN", "status": "在库", "calibrationDue": "2027-02-28" },
+    { "id": "TL-006", "type": "TT-BORE", "custodian": "HN", "status": "借出", "calibrationDue": "2026-08-31" },
+    { "id": "TL-007", "type": "TT-TORQUE", "custodian": "GA01", "status": "在库", "calibrationDue": "2027-01-15" },
+    { "id": "TL-008", "type": "TT-TORQUE", "custodian": "GA02", "status": "在库", "calibrationDue": "2027-04-30" },
+    { "id": "TL-009", "type": "TT-BORE", "custodian": "GA01", "status": "送校", "calibrationDue": "2026-09-30" }
+  ],
+  "personnel": [
+    {
+      "id": "P-01",
+      "name": "放行员01",
+      "authorizations": [
+        { "aircraftType": "C919", "level": "深度定检", "sites": ["GZ"], "validFrom": "2026-01-01", "validTo": "2026-12-31" },
+        { "aircraftType": "C919", "level": "A检", "sites": ["GZ"], "validFrom": "2026-01-01", "validTo": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-02",
+      "name": "放行员02",
+      "authorizations": [
+        { "aircraftType": "C919", "level": "A检", "sites": ["GZ", "HN"], "validFrom": "2026-01-01", "validTo": "2026-12-31" },
+        { "aircraftType": "C919", "level": "航线维修", "sites": ["GZ", "HN"], "validFrom": "2026-01-01", "validTo": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-03",
+      "name": "放行员03",
+      "authorizations": [
+        { "aircraftType": "C919", "level": "航线维修", "sites": ["GA01", "GA02", "GA03"], "validFrom": "2026-01-01", "validTo": "2026-12-31" }
+      ]
+    },
+    {
+      "id": "P-04",
+      "name": "放行员04",
+      "authorizations": [
+        { "aircraftType": "C919", "level": "航线维修", "sites": ["GA01"], "validFrom": "2026-01-01", "validTo": "2026-06-30" }
+      ]
+    },
+    {
+      "id": "P-05",
+      "name": "放行员05",
+      "authorizations": [
+        { "aircraftType": "C919", "level": "C检", "sites": ["GZ"], "validFrom": "2026-01-01", "validTo": "2026-12-31" },
+        { "aircraftType": "C919", "level": "航线维修", "sites": ["GZ", "HN"], "validFrom": "2026-01-01", "validTo": "2026-12-31" }
+      ]
+    }
+  ],
+  "components": [
+    { "serial": "SN-E001", "partNumber": "PN-ENG-001", "location": "AC-01", "lifeLimitCycles": 5000, "consumedCycles": 1200 },
+    { "serial": "SN-E002", "partNumber": "PN-ENG-001", "location": "HN-待检", "lifeLimitCycles": 5000, "consumedCycles": 4800 },
+    { "serial": "SN-E003", "partNumber": "PN-ENG-001", "location": "AC-03", "lifeLimitCycles": 5000, "consumedCycles": 200 },
+    { "serial": "SN-L001", "partNumber": "PN-LG-010", "location": "AC-01", "lifeLimitCycles": 3000, "consumedCycles": 400 },
+    { "serial": "SN-L009", "partNumber": "PN-LG-010", "location": "GZ-待检", "lifeLimitCycles": 3000, "consumedCycles": 2600 },
+    { "serial": "SN-L008", "partNumber": "PN-LG-010", "location": "报废", "lifeLimitCycles": 3000, "consumedCycles": 2990 },
+    { "serial": "SN-H005", "partNumber": "PN-HYD-020", "location": "GZ", "lifeLimitCycles": 2000, "consumedCycles": 300 }
+  ]
+}

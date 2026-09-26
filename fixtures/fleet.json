@@ -1,0 +1,16 @@
+{
+  "aircraft": [
+    { "id": "AC-01", "configuration": "CFG-A", "homeBase": "GZ", "position": "GZ", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-001", "amendment": "A0", "at": "2026-07-12" }] },
+    { "id": "AC-02", "configuration": "CFG-A", "homeBase": "GZ", "position": "GZ", "status": "定检中", "embodiedDirectives": [] },
+    { "id": "AC-03", "configuration": "CFG-A", "homeBase": "HN", "position": "HN", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-001", "amendment": "A0", "at": "2026-07-20" }] },
+    { "id": "AC-04", "configuration": "CFG-A", "homeBase": "GZ", "position": "GA02", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-001", "amendment": "A0", "at": "2026-07-25" }] },
+    { "id": "AC-05", "configuration": "CFG-A", "homeBase": "HN", "position": "GA03", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-001", "amendment": "A0", "at": "2026-07-28" }] },
+    { "id": "AC-06", "configuration": "CFG-A", "homeBase": "GZ", "position": "GZ", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-001", "amendment": "A0", "at": "2026-08-02" }] },
+    { "id": "AC-07", "configuration": "CFG-A", "homeBase": "HN", "position": "HN", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-001", "amendment": "A0", "at": "2026-08-05" }] },
+    { "id": "AC-08", "configuration": "CFG-A", "homeBase": "GZ", "position": "GA01", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-001", "amendment": "A0", "at": "2026-08-09" }] },
+    { "id": "AC-09", "configuration": "CFG-A", "homeBase": "HN", "position": "GZ", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-001", "amendment": "A0", "at": "2026-08-12" }] },
+    { "id": "AC-10", "configuration": "CFG-B", "homeBase": "GZ", "position": "GZ", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-003", "amendment": "A0", "at": "2026-08-15" }] },
+    { "id": "AC-11", "configuration": "CFG-B", "homeBase": "HN", "position": "HN", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-003", "amendment": "A0", "at": "2026-08-18" }] },
+    { "id": "AC-12", "configuration": "CFG-B", "homeBase": "GZ", "position": "GA01", "status": "在役", "embodiedDirectives": [{ "id": "AD-2026-003", "amendment": "A0", "at": "2026-08-20" }] }
+  ]
+}

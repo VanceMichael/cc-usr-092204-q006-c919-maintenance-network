@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "部件与工具流转记录",
+  "type": "object",
+  "required": ["seq", "kind", "item", "from", "to", "at"],
+  "properties": {
+    "seq": { "type": "integer", "minimum": 1, "description": "台账内唯一递增序号" },
+    "kind": {
+      "type": "string",
+      "enum": ["装上", "拆下", "借出", "归还", "送校", "校准返回", "报废"]
+    },
+    "item": { "type": "string", "description": "部件序号或工具编号" },
+    "from": { "type": "string", "description": "发出位置" },
+    "to": { "type": "string", "description": "去向位置" },
+    "at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

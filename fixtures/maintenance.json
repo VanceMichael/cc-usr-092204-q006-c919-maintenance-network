@@ -1,0 +1,70 @@
+{
+  "programs": [
+    {
+      "id": "MP-C919",
+      "revision": "R2",
+      "effectiveFrom": "2026-01-01",
+      "appliesToConfigs": ["CFG-A", "CFG-B"],
+      "tasks": [
+        { "card": "WC-1001", "level": "航线维修" },
+        { "card": "WC-1002", "level": "航线维修" },
+        { "card": "WC-2001", "level": "A检" }
+      ]
+    },
+    {
+      "id": "MP-C919",
+      "revision": "R3",
+      "effectiveFrom": "2026-09-01",
+      "appliesToConfigs": ["CFG-A", "CFG-B"],
+      "tasks": [
+        { "card": "WC-1001", "level": "航线维修" },
+        { "card": "WC-1002", "level": "航线维修" },
+        { "card": "WC-2001", "level": "A检" },
+        { "card": "WC-2005", "level": "A检" },
+        { "card": "WC-3001", "level": "深度定检" }
+      ]
+    }
+  ],
+  "workcards": [
+    { "id": "WC-1001", "revision": "R1", "title": "每日航前检查", "level": "航线维修", "appliesToConfigs": ["CFG-A", "CFG-B"], "effectiveFrom": "2026-01-01", "requiredTools": [] },
+    { "id": "WC-1001", "revision": "R2", "title": "每日航前检查", "level": "航线维修", "appliesToConfigs": ["CFG-A", "CFG-B"], "effectiveFrom": "2026-06-01", "supersedes": "R1", "requiredTools": [] },
+    { "id": "WC-1002", "revision": "R1", "title": "航后检查", "level": "航线维修", "appliesToConfigs": ["CFG-A", "CFG-B"], "effectiveFrom": "2026-01-01", "requiredTools": ["TT-TORQUE"] },
+    { "id": "WC-1002", "revision": "R2", "title": "航后检查（方法升级）", "level": "航线维修", "appliesToConfigs": ["CFG-A", "CFG-B"], "effectiveFrom": "2026-09-20", "supersedes": "R1", "requiredTools": ["TT-TORQUE"] },
+    { "id": "WC-2001", "revision": "R2", "title": "A检工作包", "level": "A检", "appliesToConfigs": ["CFG-A", "CFG-B"], "effectiveFrom": "2026-02-01", "supersedes": "R1", "requiredTools": ["TT-TORQUE", "TT-BORE"] },
+    { "id": "WC-2001", "revision": "R3", "title": "A检工作包", "level": "A检", "appliesToConfigs": ["CFG-A", "CFG-B"], "effectiveFrom": "2026-09-01", "supersedes": "R2", "requiredTools": ["TT-TORQUE", "TT-BORE"] },
+    { "id": "WC-2005", "revision": "R1", "title": "适航指令附加专项检查", "level": "A检", "appliesToConfigs": ["CFG-A", "CFG-B"], "effectiveFrom": "2026-09-20", "requiredTools": ["TT-BORE"] },
+    { "id": "WC-3001", "revision": "R1", "title": "深度定检工作包", "level": "深度定检", "appliesToConfigs": ["CFG-A", "CFG-B"], "effectiveFrom": "2026-08-01", "requiredTools": ["TT-TORQUE", "TT-BORE", "TT-JACK", "TT-SOFT"] }
+  ],
+  "directives": [
+    {
+      "id": "AD-2026-001",
+      "amendment": "A0",
+      "title": "起落架接头重复检查",
+      "appliesToConfigs": ["CFG-A"],
+      "effectiveFrom": "2026-07-01",
+      "mandatoryFrom": "2026-08-01",
+      "addsCards": [],
+      "supersedesCards": []
+    },
+    {
+      "id": "AD-2026-002",
+      "amendment": "A1",
+      "title": "航后检查方法升级并追加专项检查",
+      "appliesToConfigs": ["CFG-A", "CFG-B"],
+      "effectiveFrom": "2026-09-20",
+      "mandatoryFrom": "2026-10-01",
+      "addsCards": ["WC-2005"],
+      "supersedesCards": [{ "card": "WC-1002", "revision": "R1" }]
+    },
+    {
+      "id": "AD-2026-003",
+      "amendment": "A0",
+      "title": "改装构型软件版本核查",
+      "appliesToConfigs": ["CFG-B"],
+      "effectiveFrom": "2026-08-01",
+      "mandatoryFrom": "2026-09-01",
+      "addsCards": [],
+      "supersedesCards": []
+    }
+  ]
+}

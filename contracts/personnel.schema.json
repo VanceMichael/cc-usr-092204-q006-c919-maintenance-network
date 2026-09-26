@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "放行人员",
+  "type": "object",
+  "required": ["id", "name", "authorizations"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "authorizations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["aircraftType", "level", "sites", "validFrom", "validTo"],
+        "properties": {
+          "aircraftType": { "type": "string" },
+          "level": {
+            "type": "string",
+            "enum": ["航线维修", "A检", "C检", "深度定检"],
+            "description": "授权层级，高层级覆盖低层级"
+          },
+          "sites": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "授权站点范围"
+          },
+          "validFrom": { "type": "string" },
+          "validTo": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

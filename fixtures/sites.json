@@ -1,0 +1,96 @@
+{
+  "sites": [
+    {
+      "id": "GZ",
+      "name": "广州基地",
+      "type": "主基地",
+      "capabilities": [
+        { "level": "航线维修", "aircraftType": "C919", "status": "有效", "since": "2026-01-01" },
+        { "level": "A检", "aircraftType": "C919", "status": "有效", "since": "2026-01-01" },
+        { "level": "C检", "aircraftType": "C919", "status": "有效", "since": "2026-03-01" },
+        { "level": "深度定检", "aircraftType": "C919", "status": "有效", "since": "2026-08-01", "note": "首次深度定检后建立" }
+      ]
+    },
+    {
+      "id": "HN",
+      "name": "湖南基地",
+      "type": "主基地",
+      "capabilities": [
+        { "level": "航线维修", "aircraftType": "C919", "status": "有效", "since": "2026-01-01" },
+        { "level": "A检", "aircraftType": "C919", "status": "有效", "since": "2026-02-01" },
+        { "level": "C检", "aircraftType": "C919", "status": "有效", "since": "2026-06-01" }
+      ]
+    },
+    {
+      "id": "GA01",
+      "name": "通航机场一",
+      "type": "通航机场",
+      "capabilities": [
+        { "level": "航线维修", "aircraftType": "C919", "status": "有效", "since": "2026-04-01" }
+      ]
+    },
+    {
+      "id": "GA02",
+      "name": "通航机场二",
+      "type": "通航机场",
+      "capabilities": [
+        { "level": "航线维修", "aircraftType": "C919", "status": "有效", "since": "2026-05-01" }
+      ]
+    },
+    {
+      "id": "GA03",
+      "name": "通航机场三",
+      "type": "通航机场",
+      "capabilities": [
+        { "level": "航线维修", "aircraftType": "C919", "status": "暂停", "since": "2026-09-10", "note": "机位施工，保障能力临时暂停" }
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "site": "GZ",
+      "program": "MP-C919",
+      "programRevision": "R3",
+      "workcardRevisions": { "WC-1001": "R2", "WC-1002": "R2", "WC-2001": "R3", "WC-2005": "R1", "WC-3001": "R1" },
+      "spares": ["PN-ENG-001", "PN-LG-010", "PN-HYD-020"],
+      "supportFrom": ["HN"],
+      "note": "主基地全能力，航后工卡已升级到R2"
+    },
+    {
+      "site": "HN",
+      "program": "MP-C919",
+      "programRevision": "R3",
+      "workcardRevisions": { "WC-1001": "R2", "WC-1002": "R1", "WC-2001": "R2", "WC-2005": "R1" },
+      "spares": ["PN-ENG-001", "PN-LG-010"],
+      "supportFrom": ["GZ"],
+      "note": "航后工卡沿用R1，须在AD-2026-002强制日前升级"
+    },
+    {
+      "site": "GA01",
+      "program": "MP-C919",
+      "programRevision": "R3",
+      "workcardRevisions": { "WC-1001": "R2", "WC-1002": "R2" },
+      "spares": ["PN-LG-010"],
+      "supportFrom": ["GZ"],
+      "note": "仅航线维修，定检类工作回送主基地"
+    },
+    {
+      "site": "GA02",
+      "program": "MP-C919",
+      "programRevision": "R3",
+      "workcardRevisions": { "WC-1001": "R2", "WC-1002": "R2" },
+      "spares": [],
+      "supportFrom": ["HN"],
+      "note": "仅航线维修"
+    },
+    {
+      "site": "GA03",
+      "program": "MP-C919",
+      "programRevision": "R2",
+      "workcardRevisions": { "WC-1001": "R1", "WC-1002": "R1" },
+      "spares": [],
+      "supportFrom": ["GZ"],
+      "note": "离线机场，审计记录事后补传；方案与工卡尚未跟随R3"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "适航指令",
+  "type": "object",
+  "required": ["id", "amendment", "title", "appliesToConfigs", "effectiveFrom", "mandatoryFrom", "addsCards", "supersedesCards"],
+  "properties": {
+    "id": { "type": "string" },
+    "amendment": { "type": "string", "description": "修订版次" },
+    "title": { "type": "string" },
+    "appliesToConfigs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "effectiveFrom": { "type": "string", "description": "发布生效日期" },
+    "mandatoryFrom": { "type": "string", "description": "强制执行日期，逾期未执行不得放行" },
+    "addsCards": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "指令新增的工卡"
+    },
+    "supersedesCards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["card", "revision"],
+        "properties": {
+          "card": { "type": "string" },
+          "revision": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "description": "被指令取代的工卡修订"
+    }
+  },
+  "additionalProperties": false
+}

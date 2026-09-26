@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "寿命部件",
+  "type": "object",
+  "required": ["serial", "partNumber", "location", "lifeLimitCycles", "consumedCycles"],
+  "properties": {
+    "serial": { "type": "string", "description": "序号" },
+    "partNumber": { "type": "string", "description": "件号" },
+    "location": { "type": "string", "description": "当前位置：飞机编号、站点、站点-待检、校准机构或报废" },
+    "lifeLimitCycles": { "type": "integer", "minimum": 0, "description": "寿命上限（循环）" },
+    "consumedCycles": { "type": "integer", "minimum": 0, "description": "已消耗循环" }
+  },
+  "additionalProperties": false
+}

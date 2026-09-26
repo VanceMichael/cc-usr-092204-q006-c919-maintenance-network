@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "站点与维修能力",
+  "type": "object",
+  "required": ["id", "name", "type", "capabilities"],
+  "properties": {
+    "id": { "type": "string", "description": "站点标识" },
+    "name": { "type": "string", "description": "站点名称" },
+    "type": { "type": "string", "enum": ["主基地", "通航机场"] },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["level", "aircraftType", "status", "since"],
+        "properties": {
+          "level": { "type": "string", "enum": ["航线维修", "A检", "C检", "深度定检"] },
+          "aircraftType": { "type": "string" },
+          "status": { "type": "string", "enum": ["有效", "暂停"] },
+          "since": { "type": "string", "description": "状态生效日期" },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

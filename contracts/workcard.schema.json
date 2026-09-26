@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "维修工卡",
+  "type": "object",
+  "required": ["id", "revision", "title", "level", "appliesToConfigs", "effectiveFrom", "requiredTools"],
+  "properties": {
+    "id": { "type": "string", "description": "工卡号" },
+    "revision": { "type": "string", "description": "修订版" },
+    "title": { "type": "string" },
+    "level": { "type": "string", "enum": ["航线维修", "A检", "C检", "深度定检"] },
+    "appliesToConfigs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "effectiveFrom": { "type": "string", "description": "修订生效日期" },
+    "supersedes": { "type": "string", "description": "取代的上一修订版" },
+    "requiredTools": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "所需专用工具类型"
+    }
+  },
+  "additionalProperties": false
+}

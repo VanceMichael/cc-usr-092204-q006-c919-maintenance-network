@@ -1,0 +1,102 @@
+{
+  "flights": [
+    { "id": "FL-9101", "aircraft": "AC-05", "site": "GA03", "date": "2026-09-27", "requiresLevel": "航线维修", "kind": "航班" },
+    { "id": "FL-9102", "aircraft": "AC-05", "site": "GA01", "date": "2026-09-28", "requiresLevel": "航线维修", "kind": "航班" },
+    { "id": "FL-9103", "aircraft": "AC-04", "site": "GA02", "date": "2026-09-27", "requiresLevel": "航线维修", "kind": "航班" },
+    { "id": "FL-9104", "aircraft": "AC-08", "site": "GA01", "date": "2026-09-29", "requiresLevel": "航线维修", "kind": "航班" },
+    { "id": "FL-9201", "aircraft": "AC-07", "site": "HN", "date": "2026-09-28", "requiresLevel": "A检", "kind": "定检" },
+    { "id": "FL-9202", "aircraft": "AC-11", "site": "GZ", "date": "2026-10-02", "requiresLevel": "C检", "kind": "定检" }
+  ],
+  "releases": [
+    {
+      "id": "RL-2026-0001",
+      "aircraft": "AC-01",
+      "site": "GZ",
+      "level": "A检",
+      "openedAt": "2026-09-14T18:00:00+08:00",
+      "closedAt": "2026-09-15T12:00:00+08:00",
+      "cards": [
+        { "card": "WC-1001", "revision": "R2", "signedBy": "P-05", "signedAt": "2026-09-14T21:30:00+08:00" },
+        { "card": "WC-2001", "revision": "R3", "signedBy": "P-02", "signedAt": "2026-09-15T10:00:00+08:00" }
+      ],
+      "toolsUsed": [
+        { "tool": "TL-001", "usedAt": "2026-09-15T09:00:00+08:00" },
+        { "tool": "TL-002", "usedAt": "2026-09-15T09:30:00+08:00" }
+      ],
+      "partsInstalled": [{ "serial": "SN-L001", "at": "2026-09-15T10:30:00+08:00" }],
+      "partsRemoved": [{ "serial": "SN-L009", "at": "2026-09-15T10:30:00+08:00" }],
+      "signatures": [
+        { "person": "P-05", "role": "检验", "signedAt": "2026-09-14T22:10:00+08:00", "seq": 1 },
+        { "person": "P-02", "role": "放行", "signedAt": "2026-09-15T11:00:00+08:00", "seq": 2 }
+      ],
+      "auditRefs": [1, 2, 3, 4, 5, 6]
+    },
+    {
+      "id": "RL-2026-0002",
+      "aircraft": "AC-02",
+      "site": "GZ",
+      "level": "深度定检",
+      "openedAt": "2026-09-24T09:00:00+08:00",
+      "closedAt": null,
+      "cards": [
+        { "card": "WC-3001", "revision": "R1", "signedBy": "P-01", "signedAt": "2026-09-25T16:00:00+08:00" },
+        { "card": "WC-1002", "revision": "R1", "signedBy": "P-05", "signedAt": "2026-09-25T20:40:00+08:00" }
+      ],
+      "toolsUsed": [{ "tool": "TL-003", "usedAt": "2026-09-24T10:00:00+08:00" }],
+      "partsInstalled": [],
+      "partsRemoved": [],
+      "signatures": [
+        { "person": "P-01", "role": "检验", "signedAt": "2026-09-25T16:30:00+08:00", "seq": 1 }
+      ],
+      "auditRefs": []
+    }
+  ],
+  "initialPositions": {
+    "SN-E001": "AC-01",
+    "SN-E002": "AC-03",
+    "SN-E003": "HN",
+    "SN-L001": "GZ",
+    "SN-L009": "AC-01",
+    "SN-L008": "GZ-待检",
+    "SN-H005": "GZ",
+    "TL-001": "GZ",
+    "TL-002": "GZ",
+    "TL-003": "GZ",
+    "TL-004": "GZ",
+    "TL-005": "HN",
+    "TL-006": "HN",
+    "TL-007": "GA01",
+    "TL-008": "GA02",
+    "TL-009": "GA01"
+  },
+  "movements": [
+    { "seq": 1, "kind": "借出", "item": "TL-006", "from": "HN", "to": "GZ", "at": "2026-09-12T09:00:00+08:00" },
+    { "seq": 2, "kind": "拆下", "item": "SN-L009", "from": "AC-01", "to": "GZ-待检", "at": "2026-09-15T10:30:00+08:00" },
+    { "seq": 3, "kind": "装上", "item": "SN-L001", "from": "GZ", "to": "AC-01", "at": "2026-09-15T10:30:00+08:00" },
+    { "seq": 4, "kind": "送校", "item": "TL-009", "from": "GA01", "to": "CAL-01", "at": "2026-09-18T08:30:00+08:00" },
+    { "seq": 5, "kind": "拆下", "item": "SN-E002", "from": "AC-03", "to": "HN-待检", "at": "2026-09-20T14:00:00+08:00" },
+    { "seq": 6, "kind": "装上", "item": "SN-E003", "from": "HN", "to": "AC-03", "at": "2026-09-21T09:00:00+08:00" },
+    { "seq": 7, "kind": "报废", "item": "SN-L008", "from": "GZ-待检", "to": "报废", "at": "2026-09-22T11:00:00+08:00" }
+  ],
+  "auditEvents": {
+    "GZ": [
+      { "seq": 1, "type": "开工", "at": "2026-09-14T18:05:00+08:00", "actor": "P-05", "payload": { "release": "RL-2026-0001", "aircraft": "AC-01" } },
+      { "seq": 2, "type": "交接班", "at": "2026-09-15T00:10:00+08:00", "actor": "P-05", "payload": { "release": "RL-2026-0001", "openItems": ["WC-2001"], "shiftOut": "夜班", "shiftIn": "白班" }, "signatures": [{ "person": "P-05", "signedAt": "2026-09-15T00:10:00+08:00" }, { "person": "P-02", "signedAt": "2026-09-15T00:12:00+08:00" }] },
+      { "seq": 3, "type": "签署工卡", "at": "2026-09-15T10:00:00+08:00", "actor": "P-02", "payload": { "release": "RL-2026-0001", "card": "WC-2001", "revision": "R3" } },
+      { "seq": 4, "type": "拆换件", "at": "2026-09-15T10:30:00+08:00", "actor": "P-02", "payload": { "release": "RL-2026-0001", "installed": "SN-L001", "removed": "SN-L009" } },
+      { "seq": 5, "type": "放行", "at": "2026-09-15T11:00:00+08:00", "actor": "P-02", "payload": { "release": "RL-2026-0001", "aircraft": "AC-01" } },
+      { "seq": 6, "type": "关闭", "at": "2026-09-15T12:00:00+08:00", "actor": "P-02", "payload": { "release": "RL-2026-0001" } }
+    ],
+    "GA01": [
+      { "seq": 1, "type": "故障报告", "at": "2026-09-19T08:00:00+08:00", "actor": "P-03", "payload": { "fault": "F-100", "aircraft": "AC-08", "summary": "液压指示波动" } },
+      { "seq": 2, "type": "故障报告", "at": "2026-09-19T08:20:00+08:00", "actor": "P-04", "payload": { "fault": "F-101", "aircraft": "AC-08", "summary": "液压指示波动（重复上报）" } },
+      { "seq": 3, "type": "合并故障", "at": "2026-09-19T09:00:00+08:00", "actor": "P-03", "payload": { "into": "F-100", "mergedFrom": ["F-100", "F-101"], "reason": "同一现象重复上报，合并跟踪" } },
+      { "seq": 4, "type": "排故", "at": "2026-09-19T15:00:00+08:00", "actor": "P-03", "payload": { "fault": "F-100", "action": "更换传感器" } },
+      { "seq": 5, "type": "离线开始", "at": "2026-09-20T07:00:00+08:00", "actor": "P-03", "payload": { "reason": "机场网络中断", "allocatedRange": [6, 9] } },
+      { "seq": 6, "type": "航前检查", "at": "2026-09-20T07:30:00+08:00", "actor": "P-03", "payload": { "aircraft": "AC-08" }, "offline": true },
+      { "seq": 7, "type": "签署工卡", "at": "2026-09-20T07:50:00+08:00", "actor": "P-03", "payload": { "card": "WC-1001", "revision": "R2", "aircraft": "AC-08" }, "offline": true },
+      { "seq": 8, "type": "放行", "at": "2026-09-20T08:05:00+08:00", "actor": "P-03", "payload": { "aircraft": "AC-08" }, "offline": true },
+      { "seq": 9, "type": "离线结束", "at": "2026-09-20T18:00:00+08:00", "actor": "P-03", "payload": { "uploaded": [6, 7, 8] } }
+    ]
+  }
+}

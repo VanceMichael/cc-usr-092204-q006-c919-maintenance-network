@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "飞机与构型",
+  "type": "object",
+  "required": ["id", "configuration", "homeBase", "position", "status", "embodiedDirectives"],
+  "properties": {
+    "id": { "type": "string", "description": "去标识飞机编号" },
+    "configuration": { "type": "string", "description": "构型标识" },
+    "homeBase": { "type": "string", "description": "主基地" },
+    "position": { "type": "string", "description": "当前所在站点" },
+    "status": { "type": "string", "enum": ["在役", "定检中", "停场"] },
+    "embodiedDirectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "amendment", "at"],
+        "properties": {
+          "id": { "type": "string" },
+          "amendment": { "type": "string" },
+          "at": { "type": "string", "description": "执行日期" }
+        },
+        "additionalProperties": false
+      },
+      "description": "已执行的适航指令"
+    }
+  },
+  "additionalProperties": false
+}

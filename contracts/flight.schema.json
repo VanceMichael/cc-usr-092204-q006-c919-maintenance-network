@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "航班与定检计划",
+  "type": "object",
+  "required": ["id", "aircraft", "site", "date", "requiresLevel", "kind"],
+  "properties": {
+    "id": { "type": "string" },
+    "aircraft": { "type": "string" },
+    "site": { "type": "string", "description": "需要保障的站点" },
+    "date": { "type": "string" },
+    "requiresLevel": { "type": "string", "enum": ["航线维修", "A检", "C检", "深度定检"] },
+    "kind": { "type": "string", "enum": ["航班", "定检"] }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "专用工具",
+  "type": "object",
+  "required": ["id", "type", "custodian", "status", "calibrationDue"],
+  "properties": {
+    "id": { "type": "string" },
+    "type": { "type": "string", "description": "工具类型" },
+    "custodian": { "type": "string", "description": "保管站点" },
+    "status": { "type": "string", "enum": ["在库", "借出", "送校"] },
+    "calibrationDue": { "type": "string", "description": "校准有效期截止日" }
+  },
+  "additionalProperties": false
+}

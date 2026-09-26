@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "审计事件（原始形态）",
+  "description": "站点审计链的原始事件；哈希由审计链模块在入链时计算",
+  "type": "object",
+  "required": ["seq", "type", "at", "actor", "payload"],
+  "properties": {
+    "seq": { "type": "integer", "minimum": 1, "description": "站点链内序号，离线号段预先分配" },
+    "type": {
+      "type": "string",
+      "enum": ["开工", "签署工卡", "拆换件", "放行", "关闭", "交接班", "故障报告", "合并故障", "排故", "航前检查", "离线开始", "离线结束"]
+    },
+    "at": { "type": "string" },
+    "actor": { "type": "string" },
+    "payload": { "type": "object" },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["person", "signedAt"],
+        "properties": {
+          "person": { "type": "string" },
+          "signedAt": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "description": "多人签署，按签署时间先后排列"
+    },
+    "offline": { "type": "boolean", "description": "离线期间产生、待补传" }
+  },
+  "additionalProperties": false
+}

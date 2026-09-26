@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "一地一策保障策略",
+  "description": "每个站点各自采用的方案版本、工卡修订、备件清单与异地支援来源",
+  "type": "object",
+  "required": ["site", "program", "programRevision", "workcardRevisions", "spares", "supportFrom"],
+  "properties": {
+    "site": { "type": "string", "description": "站点标识" },
+    "program": { "type": "string", "description": "维修方案编号" },
+    "programRevision": { "type": "string", "description": "该站采用的方案版本" },
+    "workcardRevisions": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "工卡号 → 该站采用的修订版"
+    },
+    "spares": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "该站备件清单（件号）"
+    },
+    "supportFrom": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "异地支援来源站点，按优先级排序"
+    },
+    "note": { "type": "string" }
+  },
+  "additionalProperties": false
+}
